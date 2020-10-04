@@ -1,6 +1,24 @@
 # MortagePaymentCalculator
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.4.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.4 // Angular material.
+
+# Formula Below to calculate the payment
+
+formula below to calculate the payment
+
+`Payment = P x (r / n) x (1 + r / n)^n(t)] / (1 + r / n)^n(t) - 1`
+
+# Example Mortgage Payment Calculation
+
+Borrow loan for \$100,000 at 6% for 30 years, to be repaid monthly.
+
+Plug those numbers into the payment formula:
+
+{100,000 x (.06 / 12) x [1 + (.06 / 12)^12(30)]} / {[1 + (.06 / 12)^12(30)] - 1}
+(100,000 x .005 x 6.022575) / 5.022575
+3011.288 / 5.022575 = 599.55
+
+`The monthly payment is $599.55.`
 
 ## Development server
 
