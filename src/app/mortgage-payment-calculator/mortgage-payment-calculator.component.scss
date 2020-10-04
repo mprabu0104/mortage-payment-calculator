@@ -1,1 +1,15 @@
 @import "../../assets/sass/configs/colors";
+
+.mortgage-page {
+  display: flex;
+  padding: 3rem;
+
+  .house-owner-icon-container {
+    display: flex;
+    max-width: 40%;
+
+    img {
+      max-width: 100%;
+    }
+  }
+}
