@@ -1,0 +1,46 @@
+// for css variables
+
+$vars: (
+  /*- primary  -*/ primary: #006ac3,
+  /*- secondary -*/ secondary: #fedf01,
+  /*- error -*/ red-error: #af3c43,
+  /*- white -*/ white: #ffffff
+);
+
+body {
+  --primary: #{map-get($vars, primary)};
+}
+
+//For Sass Variables
+
+/*- blue -*/
+$primary: #006ac3;
+
+/*- yellow -*/
+$secondary: #fedf01;
+
+/*- success -*/
+$green-success: #03883b;
+
+/*- error -*/
+$red-error: #af3c43;
+
+/*- white -*/
+$white: #ffffff;
+
+// CSS variables
+:root {
+  // Main Brand Colours
+
+  /*- blue -*/
+  --primary: #005caa;
+
+  /*- yellow -*/
+  --secondary: #fedf01;
+
+  /*- error -*/
+  --red-error: #af3c43;
+
+  /*- white -*/
+  $white: #ffffff;
+}
