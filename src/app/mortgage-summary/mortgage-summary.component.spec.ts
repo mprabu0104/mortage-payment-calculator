@@ -29,4 +29,10 @@ describe('MortgageSummaryComponent', () => {
     fixture = TestBed.createComponent(MortgageSummaryComponent);
     component = fixture.componentInstance;
   }));
+
+  it('dialog should be closed after onClose()', () => {
+    let spy = spyOn(component.dialogRef, 'close').and.callThrough();
+    component.onClose();
+    expect(spy).toHaveBeenCalled();
+  });
 });
