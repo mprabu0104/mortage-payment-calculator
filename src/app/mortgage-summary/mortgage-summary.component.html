@@ -1,56 +1,107 @@
-<div class="mortgage-summary-body">
+<div class="modal-body mortgage-summary-body">
   <h2 mat-dialog-title>Mortgage Summary</h2>
-  <div class="col-12 d-inline-block">
-    <div class="col-6 d-inline-block">
-      <section>
-        <div>
-          <p>&nbsp;Over the 25-year amortization period, you will:</p>
-          <ul>
-            <li>
-              have made
-              <strong> 300 </strong> monthly payments of
-              <strong> 560 </strong>
-            </li>
-            <li>
-              have paid
-              <strong>{{ this.formData.mortgageAmount | currency }}</strong>
-              in principal,
-              <strong> 600 </strong> in interest, for a total of
-              <strong> 124,000</strong>.
-            </li>
-          </ul>
-          <p>&nbsp;Over the 5-year term, you will:</p>
-          <ul>
-            <li>
-              have made <strong>20</strong>
-              monthly payments of
-              <strong>560</strong>.
-            </li>
-            <li>
-              have paid
-              <strong> 450</strong> in principal, <strong> </strong> in
-              interest, for a total of <strong></strong>.
-            </li>
-          </ul>
-          <p>&nbsp;At the end of your 5-year term, you will:</p>
-          <ul>
-            <li>
-              have a balance of
-              <strong></strong>.
-            </li>
-          </ul>
-        </div>
-      </section>
+  <mat-dialog-content class="mat-typography">
+    <div class="col-12 d-inline-block">
+      <div class="col-6 d-inline-block">
+        <section>
+          <div>
+            <p>
+              &nbsp;Over the {{ this.formData.amortizationPeriod }}-year
+              amortization period, you will:
+            </p>
+            <ul>
+              <li>
+                have made
+                <strong>{{ numOfAmortizationPayments() }}</strong> monthly
+                payments of
+                <strong>{{ mortgagePayment() | currency }}</strong>
+              </li>
+              <li>
+                have paid
+                <strong>{{ this.formData.mortgageAmount | currency }}</strong>
+                in principal,
+                <strong>{{ totalInterestCost() | currency }}</strong> in
+                interest, for a total of
+                <strong>{{ totalCost() | currency }}</strong
+                >.
+              </li>
+            </ul>
+            <p>&nbsp;Over the {{ this.formData.term }}-year term, you will:</p>
+            <ul>
+              <li>
+                have made <strong>{{ numOfTermPayments() }}</strong>
+                monthly payments of
+                <strong>{{ mortgagePayment() | currency }}</strong
+                >.
+              </li>
+              <li>
+                have paid
+                <strong>{{ totalTermCost() / 3 | currency }}</strong> in
+                principal,
+                <strong>{{ (totalTermCost() * 2) / 3 | currency }}</strong> in
+                interest, for a total of
+                <strong>{{ totalTermCost() | currency }}</strong
+                >.
+              </li>
+            </ul>
+            <p>
+              &nbsp;At the end of your {{ this.formData.term }}-year term, you
+              will:
+            </p>
+            <ul>
+              <li>
+                have a balance of
+                <strong>{{
+                  this.formData.mortgageAmount +
+                    (totalTermCost() * 2) / 3 -
+                    totalTermCost() | currency
+                }}</strong
+                >.
+              </li>
+            </ul>
+          </div>
+          <div class="col-12 mortgage_payment_text">
+            <h1>
+              Your Monthly Payment will be:&nbsp;<strong>{{
+                mortgagePayment() | currency
+              }}</strong>
+            </h1>
+          </div>
+        </section>
+      </div>
+      <div class="col-6 d-inline-block">
+        <section class="house-owner-icon-container">
+          <img
+            class="summary_icon"
+            src="../../assets/images/summary_icon.svg"
+            alt="summary Icon"
+            aria-hidden="true"
+          />
+        </section>
+      </div>
     </div>
-    <div class="col-6 d-inline-block">
-      <section class="house-owner-icon-container">
-        <img
-          class="summary_icon"
-          src="../../assets/images/summary_icon.svg"
-          alt="summary Icon"
-          aria-hidden="true"
-        />
-      </section>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <div class="form-element button-element">
+      <button
+        mat-raised-button
+        type="submit"
+        class="button mts-button"
+        (click)="onClose()"
+      >
+        Close
+      </button>
     </div>
-  </div>
+
+    <a
+      role="button"
+      aria-label="Get Pre-Qualified"
+      href="https://apps.royalbank.com/apps/true-house-affordability?lang=en"
+      class="btn secondary pre_qualify_button"
+      aria-hidden="false"
+      target="_blank"
+      rel="noopener noreferrer"
+      >Get Pre-Qualified</a
+    >
+  </mat-dialog-actions>
 </div>

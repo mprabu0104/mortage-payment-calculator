@@ -14,9 +14,129 @@
             <mat-card-header class="mat-card-header">
               <mat-card-title>Payment Plan</mat-card-title>
             </mat-card-header>
-            <mat-card-content></mat-card-content>
-          </mat-card>
-        </mat-grid-tile>
+
+            <mat-card-content>
+              <div class="form-container" novalidate>
+                <form
+                  [formGroup]="formGroup"
+                  (ngSubmit)="onCalculate()"
+                  class="form"
+                >
+                  <!-- Mortgage Amount -->
+                  <mat-form-field
+                    appearance="fill"
+                    class="form-element mortgage-amount"
+                  >
+                    <mat-label>Mortgage Amount</mat-label>
+                    <span matPrefix>$&nbsp;</span>
+                    <input
+                      matInput
+                      formControlName="mortgageAmount"
+                      required
+                      type="number"
+                    />
+                    <mat-error
+                      *ngIf="
+                        !formGroup.controls['mortgageAmount'].valid &&
+                        formGroup.controls['mortgageAmount'].touched
+                      "
+                    >
+                      {{ titleAlert }}
+                    </mat-error>
+                  </mat-form-field>
+
+                  <!-- Interest Rate: -->
+                  <mat-form-field
+                    appearance="fill"
+                    class="form-element interest-rate-element"
+                  >
+                    <mat-label>Interest Rate</mat-label>
+                    <span matPrefix>%&nbsp;</span>
+                    <input
+                      matInput
+                      formControlName="interestRate"
+                      required
+                      type="number"
+                    />
+                    <mat-error
+                      *ngIf="
+                        !formGroup.controls['interestRate'].valid &&
+                        formGroup.controls['interestRate'].touched
+                      "
+                    >
+                      {{ titleAlert }}
+                    </mat-error>
+                  </mat-form-field>
+
+                  <!-- Amortization Period -->
+                  <mat-form-field
+                    appearance="fill"
+                    class="form-element amortization-periodyears-element"
+                  >
+                    <mat-label>Amortization Period</mat-label>
+                    <mat-select formControlName="amortizationPeriod">
+                      <mat-option
+                        [value]="i"
+                        *ngFor="let item of arrayYears(30); let i = index"
+                        >{{ i }}
+                        <span *ngIf="i === 0">Year</span>
+                        <span *ngIf="i !== 0">Years</span>
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <!-- Payment Frequency -->
+                  <mat-form-field
+                    appearance="fill"
+                    class="form-element payment-frequency-element"
+                  >
+                    <mat-label>Payment Frequency</mat-label>
+                    <mat-select formControlName="paymentFrequency">
+                      <mat-option
+                        *ngFor="let paymentFrequency of paymentFrequencyOptions"
+                        [value]="paymentFrequency.value"
+                      >
+                        {{ paymentFrequency.type }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <!-- Term -->
+                  <mat-form-field
+                    appearance="fill"
+                    class="form-element payment-frequency-element"
+                  >
+                    <mat-label>Term</mat-label>
+                    <mat-select formControlName="term">
+                      <mat-option
+                        [value]="i"
+                        *ngFor="let item of arrayYears(10); let i = index"
+                        >{{ i }}
+                        <span *ngIf="i === 0">Year</span>
+                        <span *ngIf="i !== 0">Years</span>
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <!-- Calculate button -->
+                  <div class="form-element button-element">
+                    <button
+                      mat-raised-button
+                      type="submit"
+                      class="button mts-button"
+                      [ngClass]="
+                        formGroup.valid ? 'enable-button' : 'disable-button'
+                      "
+                      [disabled]="!formGroup.valid"
+                    >
+                      Calculate
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </mat-card-content>
+          </mat-card></mat-grid-tile
+        >
 
         <!-- Prepayment plan Card Tile -->
         <mat-grid-tile
@@ -24,19 +144,76 @@
             <mat-card-header class="mat-card-header">
               <mat-card-title>Prepayment Plan</mat-card-title>
             </mat-card-header>
-            <mat-card-content></mat-card-content>
-          </mat-card>
-        </mat-grid-tile>
+
+            <mat-card-content>
+              <div class="form-container">
+                <form [formGroup]="formGroup" class="form">
+                  <!-- Prepayment Amount -->
+                  <mat-form-field
+                    appearance="fill"
+                    class="form-element mortgage-amount"
+                  >
+                    <mat-label>Prepayment Amount</mat-label>
+                    <span matPrefix>$&nbsp;</span>
+                    <input
+                      matInput
+                      formControlName="prePaymentAmount"
+                      type="number"
+                    />
+                    <mat-error
+                      *ngIf="
+                        !formGroup.controls['prePaymentAmount'].valid &&
+                        formGroup.controls['prePaymentAmount'].touched
+                      "
+                    >
+                      {{ titleAlert }}
+                    </mat-error>
+                  </mat-form-field>
+
+                  <!-- Prepayment Frequency -->
+                  <mat-form-field
+                    appearance="fill"
+                    class="form-element payment-frequency-element"
+                  >
+                    <mat-label>Prepayment Frequency</mat-label>
+                    <mat-select formControlName="prePaymentFrequency">
+                      <mat-option
+                        *ngFor="
+                          let prePaymentFrequency of prePaymentFrequencyOptions
+                        "
+                        [value]="prePaymentFrequency.value"
+                      >
+                        {{ prePaymentFrequency.type }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <!-- Start With Payment -->
+
+                  <mat-form-field
+                    appearance="fill"
+                    class="form-element payment-frequency-element"
+                  >
+                    <mat-label>Start With Payment</mat-label>
+                    <input
+                      matInput
+                      formControlName="startWithPayment"
+                      required
+                      type="number"
+                    />
+                  </mat-form-field>
+                </form>
+              </div>
+            </mat-card-content> </mat-card
+        ></mat-grid-tile>
       </mat-grid-list>
     </div>
   </section>
   <section class="house-owner-icon-container">
-    <section class="house-owner-icon-container">
-      <img
-        src="../../assets/images/buy_house.svg"
-        alt="Mortgage Calculation Icon"
-        aria-hidden="true"
-      />
-    </section>
+    <img
+      src="../../assets/images/buy_house.svg"
+      alt="Mortgage Calculation Icon"
+      aria-hidden="true"
+    />
   </section>
 </div>

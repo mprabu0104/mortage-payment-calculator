@@ -1,0 +1,21 @@
+@import "../../assets/scss/configs/colors";
+
+.mortgage-summary-body {
+  .mat-dialog-container {
+    padding: 0 !important;
+  }
+
+  .summary_icon {
+    width: 100%;
+    vertical-align: bottom;
+  }
+  .mortgage_payment_text,
+  .mts-button {
+    background: var(--primary);
+    color: var(--white);
+  }
+  .pre_qualify_button {
+    background: var(--secondary);
+    margin: 0 1rem;
+  }
+}
