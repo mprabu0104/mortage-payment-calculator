@@ -80,11 +80,6 @@ export class MortgageSummaryComponent implements OnInit {
 
   //Calculating the Payment Amount per Period
   public mortgagePayment(): number {
-    console.log(
-      '=> APR ',
-      this.annualPercentageRate(),
-      this.interestPayments()
-    );
     return (
       (this.formData.mortgageAmount *
         (this.annualPercentageRate() * this.interestPayments())) /
@@ -107,7 +102,6 @@ export class MortgageSummaryComponent implements OnInit {
 
   // Calculate the Total term Cost
   public totalTermCost(): number {
-    console.log(this.numOfTermPayments(), 'termPayments');
     return this.numOfTermPayments() * this.mortgagePayment();
   }
 

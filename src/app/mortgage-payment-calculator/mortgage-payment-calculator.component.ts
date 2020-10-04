@@ -82,7 +82,6 @@ export class MortgagePaymentCalculatorComponent implements OnInit {
 
   // Calculate result and open the mortgage summary form
   public onCalculate(): void {
-    console.log(this.formGroup, 'mortgageData');
     if (this.formGroup.valid) {
       this.openMortgageSummary();
     }
